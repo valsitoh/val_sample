@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html ng-app="App">
+  <head>
+    <meta charset="UTF-8">
+    <title>WebAPI Teser</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+      body {
+        margin-left: 10px; 
+        margin-left: 40px; 
+        font-family: 'Takao Pゴシック','Open Sans',Helvetica,Arial,sans-serif;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body ng-controller="AppCtrl">
+    <div class="row">
+      <div class="md-col-12">
+        <!-- tab navigations -->
+        <ul class="nav nav-tabs" role="tablist" id="myTabs">
+          <li role="presentation" class="active">
+            <a href="#tab01" role="tab" data-toggle="tab">平均待ち時間探索</a></li>
+          <li role="presentation">
+            <a href="#tab02" role="tab" data-toggle="tab">駅簡易情報</a></li>
+          <li role="presentation">
+            <a href="#tab05" role="tab" data-toggle="tab">データバージョン</a></li>
+          <li role="presentation">
+            <a href="#tab99" role="tab" data-toggle="tab">(アクセスキー設定)</a></li>
+        </ul>
+        <!-- tab panels -->
+        <div class="tab-content">
+          <!-- 平均待ち時間探索 -->
+          <div role="tabpanel" class="tab-pane active" id="tab01">
+            <div class="form-group form-inline">
+              <label>format</label>
+              <select class="form-control" ng-model="format">
+                <option value="xml">XML</option>
+                <option value="json">JSON</option>
+              </select>
+            </div>
+            <div class="form-group form-inline">
+              <label>出発駅</label>
+              <input type="text" class="form-control" ng-model="from" placeholder="">
+            </div>
+            <div class="form-group form-inline">
+              <label>到着駅</label>
+              <input type="text" class="form-control" ng-model="to" placeholder="">
+            </div>
+            <div class="form-group form-inline">
+              <label>探索日付</label>
+              <input type="text" class="form-control" ng-model="date" placeholder="">
+            </div>
+            <div>
+              <button class="btn btn-primary" ng-click="searchCoursePlain()">Test WebAPI</button>
+            </div>
+          </div>
+          <!-- 駅簡易情報 -->
+          <div role="tabpanel" class="tab-pane" id="tab02">
+            <div class="form-group form-inline">
+              <label>format</label>
+              <select class="form-control" ng-model="format">
+                <option value="xml">XML</option>
+                <option value="json">JSON</option>
+              </select>
+            </div>
+            <div class="form-group form-inline">
+              <label>駅名</label>
+              <input type="text" class="form-control" ng-model="from" placeholder="">
+            </div>
+            <div>
+              <button class="btn btn-primary" ng-click="stationLight()">Test WebAPI</button>
+            </div>
+          </div>
+          <!-- データバージョン -->
+          <div role="tabpanel" class="tab-pane" id="tab05">
+            <div class="form-group form-inline">
+              <label>format</label>
+              <select class="form-control" ng-model="format">
+                <option value="xml">XML</option>
+                <option value="json">JSON</option>
+              </select>
+            </div>
+            <div>
+              <button class="btn btn-primary" ng-click="dataversion()">Test WebAPI</button>
+            </div>
+          </div>
+          <!-- アクセスキー -->
+          <div role="tabpanel" class="tab-pane" id="tab99">
+            <div class="form-group form-inline">
+              <label>アクセスキー</label>
+              <input type="text" class="form-control" ng-model="accessKey" placeholder="アクセスキーを入力してください。">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- API URL -->
+    <div class="row">
+      <div class="col-md-12">
+        <label>{{url}}</label>
+      </span>
+    </div>
+    <!-- レスポンス -->
+    <div class="row">
+      <div class="col-md-12">
+        <textarea class="form-control" col="20" style="width:80%;">{{result}}</textarea>
+      </div>
+    </div>
+    <!-- script -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="lib/jquery-3.1.1.min.js"></script> <!-- XXX -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="index.js"></script>
+    <!-- タブ表示処理用 -->
+    <script>
+      window.onload = function() {
+        $('#myTabs').on('click', function (event) {
+          var sampleTextTarget = $(event.target).text();
+          var sampleTextRelatedTarget = $(event.relatedTarget).text();
+        });
+      };
+    </script>
+  </body>
+</html>
+
